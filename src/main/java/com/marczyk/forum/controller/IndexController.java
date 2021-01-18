@@ -18,4 +18,5 @@ public class IndexController {
         model.addAttribute("publicationList", blogRepository.getLastThreePublications());
         return "index";
     }
+
 }

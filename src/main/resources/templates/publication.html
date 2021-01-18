@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
 
@@ -31,7 +31,7 @@
           <li class="nav-item">
             <a class="nav-link" th:href="@{/}">Home</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" sec:authorize="hasRole('ADMIN')">
             <a class="nav-link" th:href="@{/add_publication}">Add Post</a>
           </li>
           <li class="nav-item">
@@ -67,14 +67,16 @@
           <p th:text="*{text}">Temp text</p>
           <br>
           <hr>
-          <form th:action="@{edit_publication(uuid=*{uuid})}" th:method="get">
-            <input type="hidden" name="uuid" th:value="*{uuid}"/>
-            <button type="submit" class="btn btn-primary">Edit</button>
-          </form>
-          <br>
-          <form th:action="@{publication(uuid=*{uuid})}" th:method="delete">
-            <button type="submit" class="btn btn-primary">Delete</button>
-          </form>
+         <div  sec:authorize="hasRole('ADMIN')">
+           <form th:action="@{edit_publication(uuid=*{uuid})}" th:method="get">
+             <input type="hidden" name="uuid" th:value="*{uuid}"/>
+             <button type="submit" class="btn btn-primary">Edit</button>
+           </form>
+           <br>
+           <form th:action="@{publication(uuid=*{uuid})}" th:method="delete">
+             <button type="submit" class="btn btn-primary">Delete</button>
+           </form>
+         </div>
         </div>
       </div>
     </div>
