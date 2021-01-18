@@ -1,0 +1,28 @@
+spring:
+  profiles:
+    active: "server"
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL55Dialect
+    hibernate:
+      ddl-auto: update
+  thymeleaf:
+    cache: false
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+---
+spring:
+  profiles: local
+  datasource:
+    url: jdbc:mysql://localhost:3306/blog?serverTimezone=UTC
+    username: root
+---
+spring:
+  profiles: server
+  datasource:
+    url: jdbc:mysql://192.168.0.2:3307/blog?serverTimezone=UTC
+    username: root
+    password: password01
